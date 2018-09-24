@@ -1,1 +1,1 @@
-print('hello world')kznfezefzejnf
+print('hello world')
