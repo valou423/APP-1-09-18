@@ -103,8 +103,8 @@ def recherche(silos):
                 found = True
             else:
                 silo_compteur += 1
-            else:
-                silo_compteur += 1
+        else:
+            silo_compteur += 1
     return silos, arrivee, depart, nombre_a_deplacer
 
 # Détermination d'un silo intermediaire
