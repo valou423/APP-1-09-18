@@ -117,7 +117,7 @@ def silo_intermediaire_aleat(nombre_de_silo, depart, arrivee):
 
 # Algorithme de Hanoï répeté jusqu'à la résolution
 
-def lancement_hanoi():
+def lancement_hanoi(nombre_a_deplacer):
     while nombre_a_deplacer < conteneurs:
         hanoi(nombre_a_deplacer, silos[depart], silos[arrivee], silos[inter])
         if len(silos[arrivee]) == conteneurs:
