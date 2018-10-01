@@ -117,7 +117,7 @@ def silo_intermediaire_aleat(nombre_de_silo, depart, arrivee):
 
 # Algorithme de Hanoï répeté jusqu'à la résolution
 
-def lancement_hanoi(nombre_a_deplacer):
+def lancement_hanoi(nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter):
     while nombre_a_deplacer < conteneurs:
         hanoi(nombre_a_deplacer, silos[depart], silos[arrivee], silos[inter])
         if len(silos[arrivee]) == conteneurs:
@@ -139,14 +139,16 @@ def lancement_hanoi(nombre_a_deplacer):
         inter = random.randint(1, nombre_de_silo) - 1
         while inter == depart or inter == arrivee:
             inter = random.randint(1, nombre_de_silo) - 1
+    return nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter
 
 # Déplacement du tout dans le Nième silo si nécessaire
 
-if arrivee != nombre_de_silo - 1:
-    inter = random.randint(1, nombre_de_silo) - 1
-    while inter == arrivee or inter == nombre_de_silo - 1:
+def nieme_silo(arrivee, nombre_de_silo, silos, inter, conteneurs):
+    if arrivee != nombre_de_silo - 1:
         inter = random.randint(1, nombre_de_silo) - 1
-    hanoi(conteneurs, silos[arrivee], silos[nombre_de_silo - 1], silos[inter])
+        while inter == arrivee or inter == nombre_de_silo - 1:
+            inter = random.randint(1, nombre_de_silo) - 1
+        hanoi(conteneurs, silos[arrivee], silos[nombre_de_silo - 1], silos[inter])
 
 
 
@@ -163,8 +165,8 @@ if accident:
     silos, temporaire = repartition(conteneurs, nombre_de_silo, silos, temporaire, detail)
     silos, arrivee, depart, nombre_a_deplacer = recherche(silos)
     inter = silo_intermediaire_aleat(nombre_de_silo, depart, arrivee)
-
-
+    nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter =lancement_hanoi(nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter)
+    arrivee, nombre_de_silo, silos, inter, conteneurs = nieme_silo(arrivee, nombre_de_silo, silos, inter, conteneurs)
 
 else:
     print("Pas d'accident, merci de réessayer !")
