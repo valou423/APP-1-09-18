@@ -134,8 +134,8 @@ def lancement_hanoi(nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter
                         found = True
                     else:
                         silo_compteur += 1
-                    else:
-                        silo_compteur += 1
+                else:
+                    silo_compteur += 1
         inter = random.randint(1, nombre_de_silo) - 1
         while inter == depart or inter == arrivee:
             inter = random.randint(1, nombre_de_silo) - 1
