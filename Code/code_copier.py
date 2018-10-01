@@ -7,7 +7,7 @@ Created on Tue Sep 18 14:36:41 2018
 
 import random
 
-#fonction Hanoî
+#fonction HanoÃ®
 
 def test_2(silo_initial, silo_final):
     if silo_initial != []:
@@ -43,7 +43,7 @@ for i in range(1,conteneurs+1):
     temporaire.append(i)
     print("Le conteneur de radioactivite",i,"a ete transfere du tube au silo temporaire")
 
-#Determination du nombre de silo à utiliser, et creation de ceux ci sous forme de listes
+#Determination du nombre de silo Ã  utiliser, et creation de ceux ci sous forme de listes
 
 print("\nCombien de silos doit-on utiliser? Le minimum de silo requis est 3")
 nombre_de_silo = int(input())
@@ -90,7 +90,7 @@ inter=random.randint(1,nombre_de_silo)-1
 while inter == depart or inter == arrivee:
     inter=random.randint(1,nombre_de_silo)-1
 
-#Algorithme de Hanoï repete jusqu'à resolution
+#Algorithme de HanoÃ¯ repete jusqu'Ã  resolution
 
 while nombre_a_deplacer<conteneurs:
     hanoi(nombre_a_deplacer, silos[depart], silos[arrivee], silos[inter])
@@ -114,7 +114,7 @@ while nombre_a_deplacer<conteneurs:
     while inter == depart or inter == arrivee:
         inter=random.randint(1,nombre_de_silo)-1
 
-#Deplacement du tout dans le Nième silo si necessaire
+#Deplacement du tout dans le NiÃ¨me silo si necessaire
 
 if arrivee != nombre_de_silo-1:
     inter=random.randint(1,nombre_de_silo)-1
