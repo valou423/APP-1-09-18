@@ -49,7 +49,7 @@ def remplissage(conteneurs, valeur_accident):
         accident = True
     return tube, accident
 
-# Transfert vers le silo temporaire
+# Transfert des conteneurs vers le silo temporaire
 
 def transfert(conteneurs, tube, detail):
     temporaire = []
@@ -115,7 +115,7 @@ def silo_intermediaire_aleat(nombre_de_silo, depart, arrivee):
         inter = random.randint(1, nombre_de_silo) - 1
     return inter
 
-# Algorithme de Hanoï répeté jusqu'à la résolution
+# Algorithme de Hanoï répeté jusqu'à la résolution du problème
 
 def lancement_hanoi(nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter, conteneur_cible, detail):
     while nombre_a_deplacer < conteneurs:
@@ -141,7 +141,7 @@ def lancement_hanoi(nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter
             inter = random.randint(1, nombre_de_silo) - 1
     return nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter
 
-# Déplacement du tout dans le Nième silo si nécessaire
+# Déplacement du tout dans le Nième silo
 
 def nieme_silo(arrivee, nombre_de_silo, silos, inter, conteneurs, detail):
     if arrivee != nombre_de_silo - 1:
@@ -152,21 +152,38 @@ def nieme_silo(arrivee, nombre_de_silo, silos, inter, conteneurs, detail):
     return arrivee, nombre_de_silo, silos, inter, conteneurs
 
 
-#On appelle detail pour demander si l'utilisateur souhaite afficher les détails
+# Lancement de l'algorythme
+# On appelle detail pour demander si l'utilisateur souhaite afficher les détails
 detail = detail()
 
+# On demande le nombre de conteneurs dans le réacteur et la valeur d'accident souhaitée
 conteneurs = int(input('\nCombien de conteneurs sont dans le réacteur ? '))
 valeur_accident = int(input("Quel est le niveau d'accident ? "))
 
+# On lance le remplissage du silo initial par le réacteur
 tube, accident = remplissage(conteneurs, valeur_accident)
 
+# On vérifie que l'accident a bien eu lieu pour lancer l'algorythme
 if accident:
+    # Transfert vers le silo temporaire
     tube, temporaire = transfert(conteneurs, tube, detail)
+
+    # Détermination du nombre de silo à utiliser
     nombre_de_silo, silos = silos()
+
+    # Répartition aléatoire dans les silos, avec respect de la contrainte
     silo_actuel, silos, temporaire = repartition(conteneurs, nombre_de_silo, silos, temporaire, detail)
+
+    # Recherche de la pile d'arrivée en fonction de la pile de départ
     silos, arrivee, depart, nombre_a_deplacer, conteneur_cible = recherche(silos, silo_actuel)
+
+    # Détermination aléatoire d'un silo intermediaire
     inter = silo_intermediaire_aleat(nombre_de_silo, depart, arrivee)
+
+    # Algorithme de Hanoï répeté jusqu'à la résolution du problème
     nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter = lancement_hanoi(nombre_a_deplacer, conteneurs, silos, depart, arrivee, inter, conteneur_cible, detail)
+
+    # Déplacement du tout dans le Nième silo
     arrivee, nombre_de_silo, silos, inter, conteneurs = nieme_silo(arrivee, nombre_de_silo, silos, inter, conteneurs, detail)
 
 else:
